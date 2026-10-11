@@ -1,6 +1,6 @@
-import 'api/api_client.dart';
-import 'api/api_exceptions.dart';
-import 'api/retry.dart';
+import 'package:lab04/api/api_client.dart';
+import 'package:lab04/api/api_exceptions.dart';
+import 'package:lab04/api/retry.dart';
 
 class ExperimentResult {
   final String label;

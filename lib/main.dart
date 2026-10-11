@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:lab04/api/api_client.dart';
+import 'package:lab04/api/api_exceptions.dart';
+import 'package:lab04/experiment_screen.dart';
+import 'package:lab04/models/item.dart';
 
-import 'api/api_client.dart';
-import 'api/api_exceptions.dart';
-import 'experiment_screen.dart';
-import 'models/item.dart';
 
 void main() => runApp(const App());
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'api/api_client.dart';
-import 'api/retry.dart';
-import 'experiment.dart';
+import 'package:lab04/api/api_client.dart';
+import 'package:lab04/api/retry.dart';
+import 'package:lab04/experiment.dart';
 
 class ExperimentScreen extends StatefulWidget {
   final ApiClient api;
