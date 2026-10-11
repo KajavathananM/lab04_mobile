@@ -88,14 +88,20 @@ class _ItemsScreenState extends State<ItemsScreen> {
           ],
         ),
       );
-      if (ok != true || !mounted) return;
+      if (ok != true || !mounted) {
+        return;
+      }
       await api.createItem(name.trim(), double.parse(priceText));
       _refresh();
     } catch (e) {
-      if (mounted) ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Could not save: $e')));
+      if (mounted) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text('Could not save: $e')));
+      }
     } finally {
-      if (mounted) setState(() => _busy = false);
+      if (mounted) {
+        setState(() => _busy = false);
+      }
     }
   }
 

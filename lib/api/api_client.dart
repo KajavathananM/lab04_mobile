@@ -111,7 +111,7 @@ class ApiClient {
             _uri('/items', failRate > 0 ? {'fail_rate': '$failRate'} : null),
             headers: {
               'Content-Type': 'application/json',
-              if (key != null) 'Idempotency-Key': key,
+              'Idempotency-Key': ?key,
             },
             body: jsonEncode({'name': name, 'price': price}),
           ));
