@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'api/api_client.dart';
 import 'api/api_exceptions.dart';
+import 'experiment_screen.dart';
 import 'models/item.dart';
 
 void main() => runApp(const App());
@@ -88,20 +89,14 @@ class _ItemsScreenState extends State<ItemsScreen> {
           ],
         ),
       );
-      if (ok != true || !mounted) {
-        return;
-      }
+      if (ok != true || !mounted) return;
       await api.createItem(name.trim(), double.parse(priceText));
       _refresh();
     } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text('Could not save: $e')));
-      }
+      if (mounted) ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Could not save: $e')));
     } finally {
-      if (mounted) {
-        setState(() => _busy = false);
-      }
+      if (mounted) setState(() => _busy = false);
     }
   }
 
@@ -179,6 +174,21 @@ class _ItemsScreenState extends State<ItemsScreen> {
               PopupMenuItem(
                   value: 'idem-on', child: Text('Idempotency test: key ON')),
             ],
+          ),
+          IconButton(
+            icon: const Icon(Icons.science),
+            tooltip: 'Retry experiment',
+            onPressed: _busy ? null : () async {
+              setState(() => _busy = true);
+              try { await _future; } catch (_) {}
+              if (!mounted) return;
+              await Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => ExperimentScreen(api: api)));
+              if (mounted) {
+                setState(() => _busy = false);
+                _refresh();
+              }
+            },
           ),
         ],
       ),
