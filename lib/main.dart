@@ -89,14 +89,20 @@ class _ItemsScreenState extends State<ItemsScreen> {
           ],
         ),
       );
-      if (ok != true || !mounted) return;
+      if (ok != true || !mounted) {
+        return;
+      }
       await api.createItem(name.trim(), double.parse(priceText));
       _refresh();
     } catch (e) {
-      if (mounted) ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Could not save: $e')));
+      if (mounted) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text('Could not save: $e')));
+      }
     } finally {
-      if (mounted) setState(() => _busy = false);
+      if (mounted) {
+        setState(() => _busy = false);
+      }
     }
   }
 
@@ -182,6 +188,7 @@ class _ItemsScreenState extends State<ItemsScreen> {
               setState(() => _busy = true);
               try { await _future; } catch (_) {}
               if (!mounted) return;
+              // ignore: use_build_context_synchronously
               await Navigator.push(context,
                   MaterialPageRoute(builder: (_) => ExperimentScreen(api: api)));
               if (mounted) {
